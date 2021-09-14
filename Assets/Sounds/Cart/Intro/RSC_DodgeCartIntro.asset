@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09034a6330e344d185381927f06afec6, type: 3}
+  m_Name: RSC_DodgeCartIntro
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 5f985cc8f4a50cf4788314f17e1cff32, type: 3}
+  - {fileID: 8300000, guid: fe49d06e3db078742a502e6d478f1f1a, type: 3}
+  - {fileID: 8300000, guid: 70836f8c31d06d143b8281ff26936d4c, type: 3}
+  - {fileID: 8300000, guid: 9ecf288d93af42741b708801bfca9437, type: 3}
+  - {fileID: 8300000, guid: 15ccfb2e39b97e5439f8c6f1c25c6cc2, type: 3}
+  - {fileID: 8300000, guid: f7d7c21d42bcf45439d4f787a744671d, type: 3}

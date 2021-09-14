@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09034a6330e344d185381927f06afec6, type: 3}
+  m_Name: RSC_DodgeCartGrind
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 2c08e1bef20ff3e4ab3b094122b0c2f5, type: 3}
+  - {fileID: 8300000, guid: b679e754e34bd3749b672c231b62e829, type: 3}
+  - {fileID: 8300000, guid: 33f52366c201aca4d97eaaf9ecf80d9e, type: 3}
+  - {fileID: 8300000, guid: 308a34ea45d6be146b390c952fdcfcd9, type: 3}
+  - {fileID: 8300000, guid: 7e4a3899a77b41a478d9b906cb3e416f, type: 3}
+  - {fileID: 8300000, guid: 84a802cbff1a0bd4aa6ab5d37e4b1b28, type: 3}

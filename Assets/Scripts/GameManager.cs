@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         state.gameSpeed += accPerSec * Time.deltaTime;
         state.gameTimer -= Time.deltaTime;
-        if(state.gameTimer<=0)
+        if(state.gameTimer <= 0)
             EndGame();
     }
 
