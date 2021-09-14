@@ -8,7 +8,8 @@ namespace Controllers
     public class WagonController : MonoBehaviour
     {
         public Align WagonAlign { get; private set; }
-    
+
+        [SerializeField] private GameState state;
         [SerializeField] private List<APlayerController> _playerControllers;
     
         [SerializeField] private Transform _leftWheelTransform;
@@ -16,37 +17,33 @@ namespace Controllers
     
         [SerializeField] private float _tiltAmount;
         [SerializeField] private float _animationTime;
+        [SerializeField] private float _maxAnimationTime;
     
-        private bool _isAnimating;
+        private bool _isAnimating = false;
 
         private void Update()
         {
-            if (_playerControllers.All(c => c.GetCurrentAlign() == Align.Left))
+            bool allLeft = _playerControllers.All(c => c.GetCurrentAlign() == Align.Left);
+            bool allRight = _playerControllers.All(c => c.GetCurrentAlign() == Align.Right);
+            
+            if (WagonAlign == Align.Center && allLeft)
             {
-                WagonAlign = Align.Left;
+                StartCoroutine(AnimateTo(Align.Left));
             }
-            else if(_playerControllers.All(c => c.GetCurrentAlign() == Align.Right))
+            else if(WagonAlign == Align.Center && allRight)
             {
-                WagonAlign = Align.Right;
+                StartCoroutine(AnimateTo(Align.Right));
             }
-            else
+            else if(!allLeft && !allRight)
             {
-                WagonAlign = Align.Center;
+                StartCoroutine(AnimateTo(Align.Center));
             }
-        
-            UpdateMesh();
         }
 
-        private void UpdateMesh()
-        {
-            if (!_isAnimating)
-            {
-                StartCoroutine(AnimateTo(WagonAlign));
-            }
-        }
 
         private IEnumerator AnimateTo(Align align)
         {
+            if(_isAnimating) yield break;
             _isAnimating = true;
 
             Quaternion baseRotation = transform.parent.localRotation;
@@ -77,9 +74,10 @@ namespace Controllers
                 }
             }
 
-            for (float elapsed = 0f; elapsed <= _animationTime; elapsed += Time.deltaTime)
+            var computedAnimationTime = Mathf.Min(_maxAnimationTime, _animationTime / state.gameSpeed);
+            for (float elapsed = 0f; elapsed <= computedAnimationTime; elapsed += Time.deltaTime)
             {
-                var progress = elapsed / _animationTime;
+                var progress = elapsed / computedAnimationTime;
                 progress = align == Align.Center ? progress * progress : Mathf.Sqrt(progress);
             
                 transform.parent.localRotation = Quaternion.Slerp(baseRotation, targetRotation, progress);
@@ -89,6 +87,7 @@ namespace Controllers
         
             transform.parent.localRotation = targetRotation;
 
+            WagonAlign = align;
             _isAnimating = false;
         }
     }

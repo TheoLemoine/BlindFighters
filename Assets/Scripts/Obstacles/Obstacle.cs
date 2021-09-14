@@ -1,9 +1,9 @@
-﻿using System;
-using Controllers;
+﻿using Controllers;
 using UnityEngine;
 
 namespace Obstacles
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Obstacle : MonoBehaviour
     {
         [SerializeField] private GameState state;
@@ -11,22 +11,31 @@ namespace Obstacles
         [SerializeField] private bool isLeftObstacle;
         [SerializeField] private bool isCenterObstacle;
         [SerializeField] private bool isRightObstacle;
-        
-        private void OnTriggerEnter(Collider other)
+
+        private Rigidbody _rb;
+
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+
+        private void OnTriggerStay(Collider other)
         {
             var wagon = other.GetComponentInParent<WagonController>();
 
-            if (isLeftObstacle && wagon.WagonAlign == Align.Right ||
+            if (isLeftObstacle && wagon.WagonAlign == Align.Left ||
                 isCenterObstacle && wagon.WagonAlign == Align.Center ||
-                isRightObstacle && wagon.WagonAlign == Align.Left)
+                isRightObstacle && wagon.WagonAlign == Align.Right)
             {
-                // loooooooose...
+                state.TriggerObstacleCollision();
             }
+
+            state.TriggerObstacleEvade();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            
+            _rb.velocity = Vector3.back * state.gameSpeed;
         }
     }
 }
