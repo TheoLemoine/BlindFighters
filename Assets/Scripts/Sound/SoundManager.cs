@@ -6,6 +6,7 @@ namespace Sound
 {
     public class SoundManager : MonoBehaviour
     {
+
         public void PlaySound(Align align, AudioClip audioClip)
         {
             StartCoroutine(CoPlaySound(align, audioClip));
