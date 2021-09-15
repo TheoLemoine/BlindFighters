@@ -189,6 +189,7 @@ public abstract class AbstractSerialThread
         serialPort.ReadTimeout = readTimeout;
         serialPort.WriteTimeout = writeTimeout;
         serialPort.Open();
+        serialPort.DtrEnable = true; // dont know why but this works
 
         if (enqueueStatusMessages)
             inputQueue.Enqueue(SerialController.SERIAL_DEVICE_CONNECTED);

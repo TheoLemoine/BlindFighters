@@ -632,7 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 7ad2ca88d2bb4104396ae46e6174fdbe, type: 2}
   _playerControllers:
-  - {fileID: 444780752}
+  - {fileID: 444780753}
   - {fileID: 1483875086}
   - {fileID: 1921708450}
   _leftWheelTransform: {fileID: 1332694330}
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   baudRate: 9600
   messageListener: {fileID: 608548278}
   reconnectionDelay: 1000
-  maxUnreadMessages: 1
+  maxUnreadMessages: 100
 --- !u!1 &698729540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483875084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac745779605e46ea9231bf7d650fce28, type: 3}
   m_Name: 
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483875084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da27cd03359247c0946f06c851958da8, type: 3}
   m_Name: 
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921708448}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac745779605e46ea9231bf7d650fce28, type: 3}
   m_Name: 
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921708448}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da27cd03359247c0946f06c851958da8, type: 3}
   m_Name: 

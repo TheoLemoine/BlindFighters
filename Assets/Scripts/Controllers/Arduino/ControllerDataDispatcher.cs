@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
@@ -8,11 +8,14 @@ namespace Controllers.Arduino
     public class ControllerDataDispatcher : MonoBehaviour
     {
         [SerializeField] private List<ArduinoReceiveController> receivers;
-        
+
         void OnMessageArrived(string msg)
         {
-            float[] values = msg.Split(' ').Select(s => float.Parse(s)).ToArray();
-
+            float[] values = msg
+                .Split(' ')
+                .Select(s => float.Parse(s, CultureInfo.InvariantCulture.NumberFormat))
+                .ToArray();
+        
             for (int i = 0; i < receivers.Count; i++)
             {
                 if (i > values.Length || float.IsNaN(values[i]))
@@ -24,7 +27,7 @@ namespace Controllers.Arduino
                 receivers[i].ReceiveData(values[i]);
             }
         }
-
+        
         void OnConnectionEvent(bool success)
         {
             Debug.Log(success ? "Connected" : "Disconnected");
