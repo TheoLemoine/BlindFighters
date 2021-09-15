@@ -61,7 +61,7 @@ namespace Controllers
                 StartCoroutine(AnimateTo(Align.Center));
             }
 
-            wind.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
+            wind.volume = Mathf.Min(_maxWindVolume / _speedToMaxWindVolume * state.gameSpeed, _maxWindVolume);
             kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
             kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
 ;
