@@ -13,17 +13,27 @@ namespace Obstacles
         [SerializeField] private bool isCenterObstacle;
         [SerializeField] private bool isRightObstacle;
         [SerializeField] private ObstacleSound obstacleSound;
-        [SerializeField] private Align soundAlignment;
+        [SerializeField] private Align alignment;
         
         private Rigidbody _rb;
         private SoundManager _soundManager;
         private bool isPlay = false;
         
-
         private void Start()
         {
             _soundManager = FindObjectOfType<SoundManager>();
             _rb = GetComponent<Rigidbody>();
+        }
+
+        public string AlignmentToString()
+        {
+            Debug.Log(alignment);
+            return (alignment == Align.Left) ? "Left" : ( (alignment == Align.Right) ? "Right" : "Center");
+        }
+
+        public int GetAlignment()
+        {
+           return (alignment == Align.Left) ? -1 : ( (alignment == Align.Right) ? 1 : 0);
         }
 
         public void IsInObstacle(Collider other)
@@ -35,7 +45,7 @@ namespace Obstacles
             {
                 state.TriggerObstacleCollision();
                 if (!isPlay)
-                    _soundManager.PlaySound(soundAlignment, obstacleSound.HitSound.GetClip());
+                    _soundManager.PlaySound(alignment, obstacleSound.HitSound.GetClip());
                 isPlay = true;
             }
             state.TriggerObstacleEvade();
@@ -43,12 +53,12 @@ namespace Obstacles
 
         public void PassedPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(soundAlignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
         }
 
         public void SignalPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(soundAlignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
         }
 
         private void FixedUpdate()

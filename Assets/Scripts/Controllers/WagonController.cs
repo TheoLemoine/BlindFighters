@@ -37,10 +37,16 @@ namespace Controllers
 
         private void Start()
         {
+            GameManager.instance.ObstacleSpawn.AddListener(CheckObstacle);
             _soundManager = FindObjectOfType<SoundManager>();
             kartRollMain.Play();
             kartRollMetallicLayer.Play();
             wind.Play();
+        }
+
+        public void CheckObstacle(int obstacleIndex)
+        {
+            Debug.Log("Obstacle is " + Obstacles.ObstacleSpawner.instance.possibleObstacles[obstacleIndex].AlignmentToString());
         }
 
         private void Update()

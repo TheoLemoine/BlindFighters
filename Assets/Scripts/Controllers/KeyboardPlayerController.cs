@@ -14,7 +14,7 @@ namespace Controllers
         
             if (Input.GetKey(rightKey))
                 return Align.Right;
-        
+            
             return Align.Center;
         }
     }
