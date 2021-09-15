@@ -54,6 +54,8 @@ namespace Obstacles
         private void FixedUpdate()
         {
             _rb.velocity = Vector3.back * state.gameSpeed;
+            
+            if(_rb.position.z < -70f) Destroy(gameObject);
         }
     }
 }
