@@ -19,8 +19,17 @@ namespace Controllers
         [SerializeField] private float _tiltAmount;
         [SerializeField] private float _animationTime;
         [SerializeField] private float _maxAnimationTime;
+        [SerializeField] private float _maxWindVolume;
+        [SerializeField] private float _speedToMaxWindVolume;
+        [SerializeField] private float _maxKartVolume;
+        [SerializeField] private float _speedToMaxKartVolume;
+        [SerializeField] private float _maxPitch;
+        [SerializeField] private float _speedToMaxPitch;
 
         [SerializeField] private KartSound kartSound;
+        [SerializeField] private AudioSource kartRollMain;
+        [SerializeField] private AudioSource kartRollMetallicLayer;
+        [SerializeField] private AudioSource wind;
     
         private bool _isAnimating = false;
         private SoundManager _soundManager;
@@ -29,6 +38,9 @@ namespace Controllers
         private void Start()
         {
             _soundManager = FindObjectOfType<SoundManager>();
+            kartRollMain.Play();
+            kartRollMetallicLayer.Play();
+            wind.Play();
         }
 
         private void Update()
@@ -48,6 +60,11 @@ namespace Controllers
             {
                 StartCoroutine(AnimateTo(Align.Center));
             }
+
+            wind.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
+            kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
+            kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
+;
         }
         
         private IEnumerator AnimateTo(Align align)
@@ -62,16 +79,19 @@ namespace Controllers
                 case Align.Left:
                     targetRotation = Quaternion.Euler(0, 0, _tiltAmount);
                     _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound);
+                    //kartRollMain.panStereo = -1;
                     break;
                 case Align.Right:
                     targetRotation = Quaternion.Euler(0, 0, -_tiltAmount);
                     _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound);
+                    //kartRollMain.panStereo = 1;
                     break;
                 case Align.Center:
                 default:
                     targetRotation = Quaternion.identity;
                     if(_grindSound.ReplayRoutine != null)
                         _soundManager.StopContinuous(_grindSound);
+                    //kartRollMain.panStereo = 0;
                     break;
             }
 
