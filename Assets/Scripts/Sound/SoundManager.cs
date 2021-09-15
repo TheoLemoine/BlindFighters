@@ -17,6 +17,8 @@ namespace Sound
         [SerializeField] private AudioSource Strings_Soft;
         [SerializeField] private AudioSource Strings_Hard;
         [SerializeField] private AudioSource Drums_Hard;
+        [SerializeField] private AudioSource MUS_Timer;
+        [SerializeField] private AudioSource MUS_Timer_02;
 
 
         public void Start()
@@ -37,7 +39,14 @@ namespace Sound
                 Strings_Soft.volume = (state.gameSpeed - 8) * 0.5f;
             else
                 Strings_Soft.volume = (state.gameSpeed - 14) * -0.5f;
-
+            if (state.gameTimer > 30)
+                MUS_Timer.volume = 0;
+            else
+                MUS_Timer.volume = 1;
+            if (state.gameTimer > 10)
+                MUS_Timer_02.volume = 0;
+            else
+                MUS_Timer_02.volume = 1;
         }
 
         private IEnumerator SyncSources()
