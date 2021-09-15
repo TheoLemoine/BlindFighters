@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Obstacles;
+﻿using System.Collections;
 using Sound.Containers;
 using UnityEngine;
 
