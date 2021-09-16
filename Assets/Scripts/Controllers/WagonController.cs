@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sound;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Controllers
 {
@@ -12,6 +13,7 @@ namespace Controllers
         public Align WagonAlign { get; private set; }
 
         [SerializeField] private GameState state;
+        [SerializeField] private AudioMixerGroup wagonMixerGroup;
         [SerializeField] private List<APlayerController> _playerControllers;
         
         [SerializeField] private bool altControl = false;
@@ -109,11 +111,11 @@ namespace Controllers
             {
                 case Align.Left:
                     targetRotation = Quaternion.Euler(0, 0, _tiltAmount);
-                    _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound);
+                    _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound, wagonMixerGroup);
                     break;
                 case Align.Right:
                     targetRotation = Quaternion.Euler(0, 0, -_tiltAmount);
-                    _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound);
+                    _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound, wagonMixerGroup);
                     break;
                 case Align.Center:
                 default:
