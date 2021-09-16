@@ -62,7 +62,8 @@ namespace Controllers
             }
 
             wind.volume = Mathf.Min(_maxWindVolume / _speedToMaxWindVolume * state.gameSpeed, _maxWindVolume);
-            kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
+            //kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
+            kartRollMain.pitch = (state.gameSpeed - 8) * ((state.gameSpeed - 0.5f) / (_speedToMaxPitch - 8));
             kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
 ;
         }
