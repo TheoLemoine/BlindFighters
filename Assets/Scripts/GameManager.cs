@@ -11,17 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float slowDownPerCollide = 10;
     [SerializeField] private float minGameSpeed = 5;
 
-    [Range(1,3)]
-    [SerializeField] private int numberOfPlayersRequired = 1;
-    public int NumberOfPlayersRequired {
-        get { return numberOfPlayersRequired; }
-    }
-
-    #region Events
-    public ObstacleSpawn ObstacleSpawn;
-    public ObstacleDespawn ObstacleDespawn;
-    #endregion
-
     private void Awake() {
         if (instance != null && instance != this)
         {

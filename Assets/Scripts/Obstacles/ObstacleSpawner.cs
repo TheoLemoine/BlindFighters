@@ -35,7 +35,6 @@ namespace Obstacles
         private void SpawnObstacle()
         {
             int obstacleIndex = Random.Range(0, possibleObstacles.Count);
-            GameManager.instance.ObstacleSpawn.Invoke(obstacleIndex);
             Instantiate(possibleObstacles[obstacleIndex], obstacleContainer);
         }
     }

@@ -25,16 +25,23 @@ namespace Obstacles
             _rb = GetComponent<Rigidbody>();
         }
 
+        #region Alignment
+        public Align GetAlignment()
+        {
+            return alignment;
+        }
+
         public string AlignmentToString()
         {
             Debug.Log(alignment);
             return (alignment == Align.Left) ? "Left" : ( (alignment == Align.Right) ? "Right" : "Center");
         }
 
-        public int GetAlignment()
+        public int AlignmentToInt()
         {
            return (alignment == Align.Left) ? -1 : ( (alignment == Align.Right) ? 1 : 0);
         }
+        #endregion
 
         public void IsInObstacle(Collider other)
         {
@@ -59,6 +66,16 @@ namespace Obstacles
         public void SignalPreObstacle(Collider other)
         {
             _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
+        }
+
+        public void OnEnterObstacleZone(Collider other)
+        {
+            state.TriggerOnEnterObstacleZone(gameObject.GetInstanceID());
+        }
+
+        public void OnExitObstacleZone(Collider other)
+        {
+            state.TriggerOnExitObstacleZone(gameObject.GetInstanceID());
         }
 
         private void FixedUpdate()
