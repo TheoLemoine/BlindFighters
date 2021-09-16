@@ -71,11 +71,11 @@ namespace Controllers
 
             #region Alt Mode for Obstacles
             Align goodAlign = (currentObstacleAlign == Align.Right) ? Align.Left
-                : ((currentObstacleAlign == Align.Left) ? Align.Right : Align.Center);
+                : ((currentObstacleAlign == Align.Left) ? Align.Right : Align.Center);
             bool overrideAlignment = altControl && _playerControllers.Count(p => p.GetCurrentAlign() == goodAlign) >= state.NumberOfPlayersRequired;
             #endregion
 
-            if (overrideAlignment)
+            if (overrideAlignment && WagonAlign != goodAlign)
             {
                 StartCoroutine(AnimateTo(goodAlign));
             }
