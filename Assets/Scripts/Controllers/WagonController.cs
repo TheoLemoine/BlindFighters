@@ -14,6 +14,7 @@ namespace Controllers
 
         [SerializeField] private GameState state;
         [SerializeField] private AudioMixerGroup wagonMixerGroup;
+        [SerializeField] private AudioMixerGroup uiMixerGroup;
         [SerializeField] private List<APlayerController> _playerControllers;
         
         [SerializeField] private bool altControl = false;
@@ -111,11 +112,11 @@ namespace Controllers
             {
                 case Align.Left:
                     targetRotation = Quaternion.Euler(0, 0, _tiltAmount);
-                    _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound, wagonMixerGroup);
+                    _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound, uiMixerGroup);
                     break;
                 case Align.Right:
                     targetRotation = Quaternion.Euler(0, 0, -_tiltAmount);
-                    _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound, wagonMixerGroup);
+                    _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound, uiMixerGroup);
                     break;
                 case Align.Center:
                 default:
