@@ -23,6 +23,7 @@ namespace Controllers
         [SerializeField] private float _speedToMaxWindVolume;
         [SerializeField] private float _maxKartVolume;
         [SerializeField] private float _speedToMaxKartVolume;
+        [SerializeField] private float _startPitch;
         [SerializeField] private float _maxPitch;
         [SerializeField] private float _speedToMaxPitch;
 
@@ -61,9 +62,10 @@ namespace Controllers
                 StartCoroutine(AnimateTo(Align.Center));
             }
 
-            wind.volume = Mathf.Min(_maxWindVolume / _speedToMaxWindVolume * state.gameSpeed, _maxWindVolume);
+            wind.volume = Mathf.Min(Mathf.Log(_maxWindVolume / _speedToMaxWindVolume * state.gameSpeed*10,10), _maxWindVolume);
+            Debug.Log(wind.volume);
             //kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
-            kartRollMain.pitch = (state.gameSpeed - 8) * ((state.gameSpeed - 0.5f) / (_speedToMaxPitch - 8));
+            kartRollMain.pitch = Mathf.Min(Mathf.Max((state.gameSpeed - 8) * ((state.gameSpeed - _startPitch) / (_speedToMaxPitch - 8)),_startPitch), _maxPitch);
             kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
 ;
         }

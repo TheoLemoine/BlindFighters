@@ -641,9 +641,10 @@ MonoBehaviour:
   _animationTime: 10
   _maxAnimationTime: 0.3
   _maxWindVolume: 1
-  _speedToMaxWindVolume: 30
+  _speedToMaxWindVolume: 40
   _maxKartVolume: 1
   _speedToMaxKartVolume: 30
+  _startPitch: 0.5
   _maxPitch: 2
   _speedToMaxPitch: 30
   kartSound: {fileID: 11400000, guid: 2b09b35e1f6e8e146b39ff6d55f30275, type: 2}
