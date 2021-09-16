@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
 namespace Obstacles
@@ -13,12 +15,18 @@ namespace Obstacles
 
         [SerializeField] private float distanceBetweenObstacles = 10f;
 
-        IEnumerator Start()
+        private float _timeSinceLastObstacle = 0f;
+        
+        private void Update()
         {
-            for (;;)
+            var timeBetweenObstacles = distanceBetweenObstacles / state.gameSpeed;
+
+            _timeSinceLastObstacle += Time.deltaTime;
+
+            if (_timeSinceLastObstacle > timeBetweenObstacles)
             {
                 SpawnObstacle();
-                yield return new WaitForSeconds(distanceBetweenObstacles / state.gameSpeed);
+                _timeSinceLastObstacle = 0;
             }
         }
 
@@ -27,6 +35,13 @@ namespace Obstacles
             var selectedObstacle = possibleObstacles[Random.Range(0, possibleObstacles.Count)];
 
             Instantiate(selectedObstacle, obstacleContainer);
+        }
+
+        public void Clear()
+        {
+            foreach (Transform obstacle in obstacleContainer) {
+                Destroy(obstacle.gameObject);
+            }
         }
     }
 }

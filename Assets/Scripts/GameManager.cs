@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
     [SerializeField] private float startTimer;
     [SerializeField] private GameState state;
     [SerializeField] private float accPerSec = 0.3f;
     [SerializeField] private float slowDownPerCollide = 10;
     [SerializeField] private float minGameSpeed = 5;
 
+    public bool IsGameOn { get; private set; } = false;
+    
     private void Start()
     {
         state.OnObstacleCollide += SlowDownGame;
-        state.gameTimer = startTimer;
+        ResetState();
     }
 
     private void SlowDownGame()
@@ -23,13 +24,32 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(!IsGameOn) return;
+        
+        // update game stats
         state.gameSpeed += accPerSec * Time.deltaTime;
         state.gameTimer -= Time.deltaTime;
-        if(state.gameTimer <= 0)
+
+        if (state.gameTimer <= 0)
+        {
             EndGame();
+        }
+    }
+
+    public void StartGame()
+    {
+        ResetState();
+        IsGameOn = true;
     }
 
     private void EndGame()
+    {
+        ResetState();
+        IsGameOn = false;
+        state.TriggerEndGame();
+    }
+
+    private void ResetState()
     {
         state.gameTimer = startTimer;
         state.gameSpeed = minGameSpeed;

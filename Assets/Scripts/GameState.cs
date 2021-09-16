@@ -9,7 +9,13 @@ public class GameState : ScriptableObject
 
     public event Action OnObstacleCollide;
     public event Action OnObstacleEvade;
+    public event Action OnGameEnded;
 
+    public void TriggerEndGame()
+    {
+        OnGameEnded?.Invoke();
+    }
+    
     public void TriggerObstacleCollision()
     {
         OnObstacleCollide?.Invoke();

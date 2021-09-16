@@ -13,18 +13,27 @@ namespace Cave
         [SerializeField] private float distanceBetweenCaves;
         [SerializeField] private int prefillAmount;
 
-        IEnumerator Start()
+        void Start()
         {
             Prefill();
-            
-            for (;;)
+        }
+        
+        private float _timeSinceLastCave = 0f;
+        
+        private void Update()
+        {
+            var timeBetweenCaves = distanceBetweenCaves / state.gameSpeed;
+
+            _timeSinceLastCave += Time.deltaTime;
+
+            if (_timeSinceLastCave > timeBetweenCaves)
             {
-                SpawnObstacle();
-                yield return new WaitForSeconds(distanceBetweenCaves / state.gameSpeed);
+                SpawnCave();
+                _timeSinceLastCave = 0;
             }
         }
 
-        private void SpawnObstacle()
+        private void SpawnCave()
         {
             var selectedObstacle = caves[Random.Range(0, caves.Count)];
 
