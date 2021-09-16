@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour    
 {
+    public static GameManager instance = null;
     
     [SerializeField] private float startTimer;
     [SerializeField] private GameState state;
@@ -10,6 +11,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float slowDownPerCollide = 10;
     [SerializeField] private float minGameSpeed = 5;
 
+    private void Awake() {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return; //Avoid doing anything else
+        }
+        instance = this;
+    }
+    
     private void Start()
     {
         state.OnObstacleCollide += SlowDownGame;
