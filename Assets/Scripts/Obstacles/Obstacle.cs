@@ -46,6 +46,13 @@ namespace Obstacles
         public void IsInObstacle(Collider other)
         {
             var wagon = other.GetComponentInParent<WagonController>();
+            /*
+            if(isLeftObstacle && isRightObstacle)
+            {
+                if (!isPlay)
+                    _soundManager.PlaySound(soundAlignment, obstacleSound.PreOngoingSound.GetClip());
+            }
+            */
             if (isLeftObstacle && wagon.WagonAlign == Align.Left ||
                 isCenterObstacle && wagon.WagonAlign == Align.Center ||
                 isRightObstacle && wagon.WagonAlign == Align.Right)

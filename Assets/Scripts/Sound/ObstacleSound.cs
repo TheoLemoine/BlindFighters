@@ -7,7 +7,9 @@ namespace Sound
     public class ObstacleSound : ScriptableObject
     {
         public ASoundContainer SignalSound;
+        public ASoundContainer PreOngoingSound;
         public ASoundContainer OngoingSound;
+        public ASoundContainer PostOngoingSound;
         public ASoundContainer HitSound;
     }
 }
