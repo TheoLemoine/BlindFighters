@@ -178,6 +178,10 @@ PrefabInstance:
       value: Obstacle RL
       objectReference: {fileID: 0}
     - target: {fileID: 2737005077569106228, guid: 96d416e9f02605747814820dcbed1bb9, type: 3}
+      propertyPath: alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737005077569106228, guid: 96d416e9f02605747814820dcbed1bb9, type: 3}
       propertyPath: obstacleSound
       value: 
       objectReference: {fileID: 11400000, guid: 04fd44775a287134a84eda7e8cdb1488, type: 2}

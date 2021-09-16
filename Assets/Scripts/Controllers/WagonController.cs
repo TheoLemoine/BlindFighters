@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Sound;
@@ -12,6 +13,11 @@ namespace Controllers
 
         [SerializeField] private GameState state;
         [SerializeField] private List<APlayerController> _playerControllers;
+        
+        [SerializeField] private bool altControl = false;
+        private void AltControlOn() { altControl = true; }
+        private void AltControlOff() { altControl = false; }
+        [SerializeField] private Align currentObstacleAlign;
     
         [SerializeField] private Transform _leftWheelTransform;
         [SerializeField] private Transform _rightWheelTransform;
@@ -38,26 +44,50 @@ namespace Controllers
 
         private void Start()
         {
+            state.OnEnterObstacleZone += EnterObstacleMode;
+            state.OnExitObstacleZone += ExitObstacleMode;
             _soundManager = FindObjectOfType<SoundManager>();
             kartRollMain.Play();
             kartRollMetallicLayer.Play();
             wind.Play();
         }
 
+        private void EnterObstacleMode(int id)
+        {
+            var obstacle = Array.Find(GameObject.FindGameObjectsWithTag("Obstacle"), go => go.GetInstanceID() == id).GetComponent<Obstacles.Obstacle>();
+            currentObstacleAlign = obstacle.GetAlignment();
+            AltControlOn();
+        }
+
+        private void ExitObstacleMode(int id)
+        {
+            AltControlOff();
+        }
+
         private void Update()
         {
-            bool allLeft = _playerControllers.All(c => c.GetCurrentAlign() == Align.Left);
-            bool allRight = _playerControllers.All(c => c.GetCurrentAlign() == Align.Right);
-            
-            if (WagonAlign == Align.Center && allLeft)
+            int playersLeft = _playerControllers.Count(p => p.GetCurrentAlign() == Align.Left);
+            int playersRight = _playerControllers.Count(p => p.GetCurrentAlign() == Align.Right);
+
+            #region Alt Mode for Obstacles
+            Align goodAlign = (currentObstacleAlign == Align.Right) ? Align.Left
+                : ((currentObstacleAlign == Align.Left) ? Align.Right : Align.Center);
+            bool overrideAlignment = altControl && _playerControllers.Count(p => p.GetCurrentAlign() == goodAlign) >= state.NumberOfPlayersRequired;
+            #endregion
+
+            if (overrideAlignment)
+            {
+                StartCoroutine(AnimateTo(goodAlign));
+            }
+            else if (WagonAlign == Align.Center && playersLeft == 3)
             {
                 StartCoroutine(AnimateTo(Align.Left));
             }
-            else if(WagonAlign == Align.Center && allRight)
+            else if(WagonAlign == Align.Center && playersRight == 3)
             {
                 StartCoroutine(AnimateTo(Align.Right));
             }
-            else if(WagonAlign != Align.Center && !allLeft && !allRight)
+            else if(WagonAlign != Align.Center && playersLeft<3 && playersRight<3)
             {
                 StartCoroutine(AnimateTo(Align.Center));
             }
@@ -66,7 +96,6 @@ namespace Controllers
             //kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
             kartRollMain.pitch = Mathf.Min(Mathf.Max((state.gameSpeed - 8) * ((state.gameSpeed - _startPitch) / (_speedToMaxPitch - 8)),_startPitch), _maxPitch);
             kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
-;
         }
         
         private IEnumerator AnimateTo(Align align)
