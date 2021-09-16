@@ -11,7 +11,11 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private ObstacleSpawner spawner;
     [SerializeField] private WagonController controller;
     [SerializeField] private UIManager ui;
-    
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip right;
+    [SerializeField] private AudioClip left;
+    [SerializeField] private AudioClip center;
+
     private void Start()
     {
         StartTutorial();
@@ -30,6 +34,8 @@ public class Tutorial : MonoBehaviour
         spawner.enabled = false;
         
         ui.SetMessage("Move your wagon to the left !");
+        audioSource.clip = left;
+        audioSource.Play();
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Left)
         {
@@ -37,6 +43,8 @@ public class Tutorial : MonoBehaviour
         }
         
         ui.SetMessage("Good, now move your wagon to the right !");
+        audioSource.clip = right;
+        audioSource.Play();
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Right)
         {
@@ -44,6 +52,8 @@ public class Tutorial : MonoBehaviour
         }
         
         ui.SetMessage("Great, now move your wagon to the middle !");
+        audioSource.clip = center;
+        audioSource.Play();
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Center)
         {

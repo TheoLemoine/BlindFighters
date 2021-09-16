@@ -28,6 +28,8 @@ namespace Sound
         [SerializeField] private AudioSource VO_Timer_30_s;
         [SerializeField] private AudioSource VO_Timer_10_s;
 
+        [SerializeField] private AudioSource AMB_Cave;
+
 
         public void Start()
         {
