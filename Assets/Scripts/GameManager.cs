@@ -3,12 +3,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+    
     [SerializeField] private float startTimer;
     [SerializeField] private GameState state;
     [SerializeField] private float accPerSec = 0.3f;
     [SerializeField] private float slowDownPerCollide = 10;
     [SerializeField] private float minGameSpeed = 5;
 
+    private void Awake() {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return; //Avoid doing anything else
+        }
+        instance = this;
+    }
+    
     public bool IsGameOn { get; private set; } = false;
     
     private void Start()

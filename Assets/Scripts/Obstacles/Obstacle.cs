@@ -13,18 +13,35 @@ namespace Obstacles
         [SerializeField] private bool isCenterObstacle;
         [SerializeField] private bool isRightObstacle;
         [SerializeField] private ObstacleSound obstacleSound;
-        [SerializeField] private Align soundAlignment;
+        [SerializeField] private Align alignment;
         
         private Rigidbody _rb;
         private SoundManager _soundManager;
         private bool isPlay = false;
         
-
         private void Start()
         {
             _soundManager = FindObjectOfType<SoundManager>();
             _rb = GetComponent<Rigidbody>();
         }
+
+        #region Alignment
+        public Align GetAlignment()
+        {
+            return alignment;
+        }
+
+        public string AlignmentToString()
+        {
+            Debug.Log(alignment);
+            return (alignment == Align.Left) ? "Left" : ( (alignment == Align.Right) ? "Right" : "Center");
+        }
+
+        public int AlignmentToInt()
+        {
+           return (alignment == Align.Left) ? -1 : ( (alignment == Align.Right) ? 1 : 0);
+        }
+        #endregion
 
         public void IsInObstacle(Collider other)
         {
@@ -35,7 +52,7 @@ namespace Obstacles
             {
                 state.TriggerObstacleCollision();
                 if (!isPlay)
-                    _soundManager.PlaySound(soundAlignment, obstacleSound.HitSound.GetClip());
+                    _soundManager.PlaySound(alignment, obstacleSound.HitSound.GetClip());
                 isPlay = true;
             }
             state.TriggerObstacleEvade();
@@ -43,12 +60,22 @@ namespace Obstacles
 
         public void PassedPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(soundAlignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
         }
 
         public void SignalPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(soundAlignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
+        }
+
+        public void OnEnterObstacleZone(Collider other)
+        {
+            state.TriggerOnEnterObstacleZone(gameObject.GetInstanceID());
+        }
+
+        public void OnExitObstacleZone(Collider other)
+        {
+            state.TriggerOnExitObstacleZone(gameObject.GetInstanceID());
         }
 
         private void FixedUpdate()

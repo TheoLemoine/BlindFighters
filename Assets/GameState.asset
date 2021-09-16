@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f97f5f3e875493397e7cccef82a324c, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  gameSpeed: 5
+  gameSpeed: 8.00422
+  gameTimer: 237.06512
+  NumberOfPlayersRequired: 1
