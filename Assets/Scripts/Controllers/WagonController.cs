@@ -13,7 +13,7 @@ namespace Controllers
         public Align WagonAlign { get; private set; }
 
         [SerializeField] private GameState state;
-        [SerializeField] private AudioMixerGroup wagonMixerGroup;
+        [SerializeField] private AudioMixerGroup toneMixerGroup;
         [SerializeField] private AudioMixerGroup uiMixerGroup;
         [SerializeField] private List<APlayerController> _playerControllers;
         [SerializeField] private List<AudioClip> tones;
@@ -79,14 +79,14 @@ namespace Controllers
             // sounds on new player on a side
             if (playersLeft > _nbPlayerLeft)
             {
-                _soundManager.PlaySound(Align.Left, tones[playersLeft - 1], uiMixerGroup);
+                _soundManager.PlaySound(Align.Left, tones[playersLeft - 1], toneMixerGroup);
             }
 
             _nbPlayerLeft = playersLeft;
 
             if (playersRight > _nbPlayerRight)
             {
-                _soundManager.PlaySound(Align.Right, tones[playersRight - 1], uiMixerGroup);
+                _soundManager.PlaySound(Align.Right, tones[playersRight - 1], toneMixerGroup);
             }
 
             _nbPlayerRight = playersRight;
