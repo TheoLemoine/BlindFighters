@@ -63,7 +63,6 @@ namespace Controllers
             }
 
             wind.volume = Mathf.Min(Mathf.Log(_maxWindVolume / _speedToMaxWindVolume * state.gameSpeed*10,10), _maxWindVolume);
-            Debug.Log(wind.volume);
             //kartRollMain.pitch = Mathf.Min(_maxPitch / _speedToMaxPitch * state.gameSpeed, _maxPitch);
             kartRollMain.pitch = Mathf.Min(Mathf.Max((state.gameSpeed - 8) * ((state.gameSpeed - _startPitch) / (_speedToMaxPitch - 8)),_startPitch), _maxPitch);
             kartRollMetallicLayer.volume = Mathf.Min(_maxKartVolume / _speedToMaxKartVolume * state.gameSpeed, _maxKartVolume);
@@ -82,19 +81,16 @@ namespace Controllers
                 case Align.Left:
                     targetRotation = Quaternion.Euler(0, 0, _tiltAmount);
                     _grindSound = _soundManager.PlayContinuous(Align.Left, kartSound.GrindSound);
-                    //kartRollMain.panStereo = -1;
                     break;
                 case Align.Right:
                     targetRotation = Quaternion.Euler(0, 0, -_tiltAmount);
                     _grindSound = _soundManager.PlayContinuous(Align.Right, kartSound.GrindSound);
-                    //kartRollMain.panStereo = 1;
                     break;
                 case Align.Center:
                 default:
                     targetRotation = Quaternion.identity;
                     if(_grindSound.ReplayRoutine != null)
                         _soundManager.StopContinuous(_grindSound);
-                    //kartRollMain.panStereo = 0;
                     break;
             }
 
