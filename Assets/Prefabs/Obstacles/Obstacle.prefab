@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 7ad2ca88d2bb4104396ae46e6174fdbe, type: 2}
+  obstacleMixerGroup: {fileID: -2684606236341143199, guid: 86a9e4a8895f19b44abba111e6f11006, type: 2}
   isLeftObstacle: 0
   isCenterObstacle: 0
   isRightObstacle: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Sound.Containers;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Sound
 {
@@ -93,14 +94,14 @@ namespace Sound
             }
         }
 
-        public void PlaySound(Align align, AudioClip audioClip)
+        public void PlaySound(Align align, AudioClip audioClip, AudioMixerGroup group)
         {
-            StartCoroutine(CoPlaySound(align, audioClip));
+            StartCoroutine(CoPlaySound(align, audioClip, group));
         }
 
-        public IEnumerator CoPlaySound(Align align, AudioClip audioClip)
+        public IEnumerator CoPlaySound(Align align, AudioClip audioClip, AudioMixerGroup group)
         {
-            var source = SetupSource(align, audioClip);
+            var source = SetupSource(align, audioClip, group);
             
             yield return new WaitForSeconds(audioClip.length);
             
@@ -113,9 +114,9 @@ namespace Sound
             public Coroutine ReplayRoutine;
         }
         
-        public ContinuousSound PlayContinuous(Align align, ASoundContainer container)
+        public ContinuousSound PlayContinuous(Align align, ASoundContainer container, AudioMixerGroup group)
         {
-            var source = SetupSource(align, null);
+            var source = SetupSource(align, null, group);
             var routine = StartCoroutine(ReplayContinuous(source, container));
             
             return new ContinuousSound
@@ -143,11 +144,12 @@ namespace Sound
             Destroy(sound.Source);
         }
         
-        public AudioSource SetupSource(Align align, AudioClip audioClip)
+        public AudioSource SetupSource(Align align, AudioClip audioClip, AudioMixerGroup group)
         {
             var source = gameObject.AddComponent<AudioSource>();
             source.clip = audioClip;
             source.panStereo = PanFromAlign(align);
+            source.outputAudioMixerGroup = group;
             source.Play();
 
             return source;

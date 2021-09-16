@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Sound;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Obstacles
 {
@@ -8,7 +9,7 @@ namespace Obstacles
     public class Obstacle : MonoBehaviour
     {
         [SerializeField] private GameState state;
-        
+        [SerializeField] private AudioMixerGroup obstacleMixerGroup;
         [SerializeField] private bool isLeftObstacle;
         [SerializeField] private bool isCenterObstacle;
         [SerializeField] private bool isRightObstacle;
@@ -34,12 +35,12 @@ namespace Obstacles
         public string AlignmentToString()
         {
             Debug.Log(alignment);
-            return (alignment == Align.Left) ? "Left" : ( (alignment == Align.Right) ? "Right" : "Center");
+            return (alignment == Align.Left) ? "Left" : ( (alignment == Align.Right) ? "Right" : "Center");
         }
 
         public int AlignmentToInt()
         {
-           return (alignment == Align.Left) ? -1 : ( (alignment == Align.Right) ? 1 : 0);
+           return (alignment == Align.Left) ? -1 : ( (alignment == Align.Right) ? 1 : 0);
         }
         #endregion
 
@@ -59,7 +60,7 @@ namespace Obstacles
             {
                 state.TriggerObstacleCollision();
                 if (!isPlay)
-                    _soundManager.PlaySound(alignment, obstacleSound.HitSound.GetClip());
+                    _soundManager.PlaySound(alignment, obstacleSound.HitSound.GetClip(), obstacleMixerGroup);
                 isPlay = true;
             }
             state.TriggerObstacleEvade();
@@ -67,12 +68,12 @@ namespace Obstacles
 
         public void PassedPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip(), obstacleMixerGroup);
         }
 
         public void SignalPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip());
+            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip(), obstacleMixerGroup);
         }
 
         public void OnEnterObstacleZone(Collider other)
