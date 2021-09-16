@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -639,6 +639,10 @@ MonoBehaviour:
   - {fileID: 444780752}
   - {fileID: 1483875086}
   - {fileID: 1921708450}
+  tones:
+  - {fileID: 8300000, guid: caa205d2819f38e43acbc979b10ec11e, type: 3}
+  - {fileID: 8300000, guid: 28adad015a3303040a9dec42b07c169f, type: 3}
+  - {fileID: 8300000, guid: 225364d8c8cfff44b91e4ca08cd12b4a, type: 3}
   altControl: 0
   currentObstacleAlign: 0
   _leftWheelTransform: {fileID: 1332694330}
@@ -3595,9 +3599,12 @@ MonoBehaviour:
   ui: {fileID: 103464598}
   audioSource: {fileID: 1555777064}
   welcome: {fileID: 8300000, guid: 3781d0b0c839eba44a94fc294e154323, type: 3}
-  bats: {fileID: 8300000, guid: 8170707a09c20a141a7032dab45d3a31, type: 3}
-  ghosts: {fileID: 8300000, guid: 9c974f3dbee4f184fab39bb403ed59d5, type: 3}
-  tunnel: {fileID: 8300000, guid: d92a750c277876f4dae5c4640d2e4c8f, type: 3}
+  bats_1: {fileID: 0}
+  bats_2: {fileID: 0}
+  ghosts_1: {fileID: 0}
+  ghosts_2: {fileID: 0}
+  tunnel_1: {fileID: 0}
+  tunnel_2: {fileID: 0}
 --- !u!82 &1555777064
 AudioSource:
   m_ObjectHideFlags: 0
