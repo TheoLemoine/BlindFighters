@@ -34,6 +34,12 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TutorialTimeline()
     {
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(2);
+
         spawner.Clear();
         spawner.enabled = false;
         ui.SetMessage("");
