@@ -68,7 +68,7 @@ namespace Obstacles
 
         public void PassedPreObstacle(Collider other)
         {
-            _soundManager.PlaySound(alignment, obstacleSound.SignalSound.GetClip(), obstacleMixerGroup);
+            _soundManager.PlaySound(alignment, obstacleSound.OngoingSound.GetClip(), obstacleMixerGroup);
         }
 
         public void SignalPreObstacle(Collider other)

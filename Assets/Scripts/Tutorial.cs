@@ -12,9 +12,13 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private WagonController controller;
     [SerializeField] private UIManager ui;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip right;
-    [SerializeField] private AudioClip left;
-    [SerializeField] private AudioClip center;
+    [SerializeField] private AudioClip welcome;
+    [SerializeField] private AudioClip bats_1;
+    [SerializeField] private AudioClip bats_2;
+    [SerializeField] private AudioClip ghosts_1;
+    [SerializeField] private AudioClip ghosts_2;
+    [SerializeField] private AudioClip tunnel_1;
+    [SerializeField] private AudioClip tunnel_2;
 
     private void Start()
     {
@@ -32,34 +36,57 @@ public class Tutorial : MonoBehaviour
     {
         spawner.Clear();
         spawner.enabled = false;
-        
-        ui.SetMessage("Move your wagon to the left !");
-        audioSource.clip = left;
+
+        audioSource.clip = welcome;
         audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+
+        audioSource.clip = bats_1;
+        audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        ui.SetMessage("Move your wagon to the left !");
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Left)
         {
             yield return null;
         }
-        
-        ui.SetMessage("Good, now move your wagon to the right !");
-        audioSource.clip = right;
+        yield return new WaitForSeconds(1);
+
+        audioSource.clip = ghosts_1;
         audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        ui.SetMessage("Good, now move your wagon to the right !");
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Right)
         {
             yield return null;
         }
-        
-        ui.SetMessage("Great, now move your wagon to the middle !");
-        audioSource.clip = center;
+        yield return new WaitForSeconds(1);
+
+        audioSource.clip = tunnel_1;
         audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        ui.SetMessage("Great, now move your wagon to the middle !");
         yield return new WaitForSeconds(1);
         while (controller.WagonAlign != Align.Center)
         {
             yield return null;
         }
-        
+        yield return new WaitForSeconds(1);
+
         ui.SetMessage("Now the game starts !");
         yield return new WaitForSeconds(2);
         ui.SetMessage("");
