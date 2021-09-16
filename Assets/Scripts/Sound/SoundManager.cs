@@ -82,6 +82,7 @@ namespace Sound
             {
                 VO_Timer_10_s.Play();
             }
+            AMB_Cave.volume = (state.gameSpeed - 20) * -0.1f;
         }
 
         private IEnumerator SyncSources()

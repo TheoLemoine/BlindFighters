@@ -2677,7 +2677,7 @@ MonoBehaviour:
   VO_Timer_1_min: {fileID: 768650280}
   VO_Timer_30_s: {fileID: 768650279}
   VO_Timer_10_s: {fileID: 768650278}
-  AMB_Cave: {fileID: 0}
+  AMB_Cave: {fileID: 768650284}
 --- !u!82 &768650278
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3593,9 +3593,10 @@ MonoBehaviour:
   controller: {fileID: 435478081}
   ui: {fileID: 103464598}
   audioSource: {fileID: 1555777064}
-  right: {fileID: 0}
-  left: {fileID: 0}
-  center: {fileID: 0}
+  welcome: {fileID: 8300000, guid: 3781d0b0c839eba44a94fc294e154323, type: 3}
+  bats: {fileID: 8300000, guid: 8170707a09c20a141a7032dab45d3a31, type: 3}
+  ghosts: {fileID: 8300000, guid: 9c974f3dbee4f184fab39bb403ed59d5, type: 3}
+  tunnel: {fileID: 8300000, guid: d92a750c277876f4dae5c4640d2e4c8f, type: 3}
 --- !u!82 &1555777064
 AudioSource:
   m_ObjectHideFlags: 0
