@@ -16,6 +16,7 @@ namespace Controllers
         [SerializeField] private AudioMixerGroup wagonMixerGroup;
         [SerializeField] private AudioMixerGroup uiMixerGroup;
         [SerializeField] private List<APlayerController> _playerControllers;
+        [SerializeField] private List<AudioClip> tones;
         
         [SerializeField] private bool altControl = false;
         private void AltControlOn() { altControl = true; }
@@ -45,6 +46,9 @@ namespace Controllers
         private SoundManager _soundManager;
         private SoundManager.ContinuousSound _grindSound;
 
+        private int _nbPlayerRight = 0;
+        private int _nbPlayerLeft = 0;
+
         private void Start()
         {
             state.OnEnterObstacleZone += EnterObstacleMode;
@@ -71,6 +75,21 @@ namespace Controllers
         {
             int playersLeft = _playerControllers.Count(p => p.GetCurrentAlign() == Align.Left);
             int playersRight = _playerControllers.Count(p => p.GetCurrentAlign() == Align.Right);
+
+            // sounds on new player on a side
+            if (playersLeft > _nbPlayerLeft)
+            {
+                _soundManager.PlaySound(Align.Left, tones[playersLeft - 1], uiMixerGroup);
+            }
+
+            _nbPlayerLeft = playersLeft;
+
+            if (playersRight > _nbPlayerRight)
+            {
+                _soundManager.PlaySound(Align.Right, tones[playersRight - 1], uiMixerGroup);
+            }
+
+            _nbPlayerRight = playersRight;
 
             #region Alt Mode for Obstacles
             Align goodAlign = (currentObstacleAlign == Align.Right) ? Align.Left

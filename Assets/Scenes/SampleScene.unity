@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -634,10 +634,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 7ad2ca88d2bb4104396ae46e6174fdbe, type: 2}
   wagonMixerGroup: {fileID: 8472624335956610862, guid: 86a9e4a8895f19b44abba111e6f11006, type: 2}
+  uiMixerGroup: {fileID: 4932138406277196671, guid: 86a9e4a8895f19b44abba111e6f11006, type: 2}
   _playerControllers:
   - {fileID: 444780752}
   - {fileID: 1483875086}
   - {fileID: 1921708450}
+  tones:
+  - {fileID: 8300000, guid: caa205d2819f38e43acbc979b10ec11e, type: 3}
+  - {fileID: 8300000, guid: 28adad015a3303040a9dec42b07c169f, type: 3}
+  - {fileID: 8300000, guid: 225364d8c8cfff44b91e4ca08cd12b4a, type: 3}
   altControl: 0
   currentObstacleAlign: 0
   _leftWheelTransform: {fileID: 1332694330}

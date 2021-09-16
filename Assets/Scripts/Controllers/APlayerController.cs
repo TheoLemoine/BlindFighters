@@ -1,29 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Sound;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Controllers
 {
       public abstract class APlayerController : MonoBehaviour
       {
             [SerializeField] private float rotateAmount;
-      
             [SerializeField] private float _animationTime;
             private bool _isAnimating;
-      
+            private Align _animationAlign = Align.Center;
+
+            private SoundManager _soundManager;
+            
             public abstract Align GetCurrentAlign();
 
             private void Update()
             {
                   if (!_isAnimating)
                   {
-                        StartCoroutine(SmoothRotation(GetCurrentAlign()));
+                        var nextAlign = GetCurrentAlign();
+                        if (nextAlign != _animationAlign)
+                        {
+                              StartCoroutine(SmoothRotation(nextAlign));
+                        }
                   }
             }
 
             private IEnumerator SmoothRotation(Align align)
             {
                   _isAnimating = true;
-            
+                  
                   Quaternion baseRotation = transform.localRotation;
                   Quaternion targetRotation;
                   switch (align)
@@ -50,10 +59,10 @@ namespace Controllers
                         yield return null;
                   }
 
-                  _isAnimating = false;
-        
                   transform.localRotation = targetRotation;
-
+                  
+                  _isAnimating = false;
+                  _animationAlign = align;
             }
       }
 }
