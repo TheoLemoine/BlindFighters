@@ -55,7 +55,7 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         audioSource.clip = bats_2;
         audioSource.Play();
         while (audioSource.isPlaying)
@@ -71,6 +71,7 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //GHOST PART
+        ui.SetMessage("");
         spawner.SpawnGhost();
         audioSource.clip = ghosts_1;
         audioSource.Play();
@@ -78,7 +79,7 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         audioSource.clip = ghosts_2;
         audioSource.Play();
         while (audioSource.isPlaying)
@@ -94,6 +95,7 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //TUNNEL PART
+        ui.SetMessage("");
         spawner.SpawnTunnel();
         audioSource.clip = tunnel_1;
         audioSource.Play();
@@ -101,7 +103,7 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         audioSource.clip = tunnel_2;
         audioSource.Play();
         while (audioSource.isPlaying)
