@@ -36,44 +36,73 @@ public class Tutorial : MonoBehaviour
     {
         spawner.Clear();
         spawner.enabled = false;
+        ui.SetMessage("");
 
+        //INTRO
         audioSource.clip = welcome;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
+        //BATS PART
+        spawner.SpawnBats();
         audioSource.clip = bats_1;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        ui.SetMessage("Move your wagon to the left !");
         yield return new WaitForSeconds(1);
+        audioSource.clip = bats_2;
+        audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        ui.SetMessage("Move your wagon to the left !");
+        yield return new WaitForSeconds(2);
         while (controller.WagonAlign != Align.Left)
         {
             yield return null;
         }
         yield return new WaitForSeconds(1);
 
+        //GHOST PART
+        spawner.SpawnGhost();
         audioSource.clip = ghosts_1;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        ui.SetMessage("Good, now move your wagon to the right !");
         yield return new WaitForSeconds(1);
+        audioSource.clip = ghosts_2;
+        audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        ui.SetMessage("Good, now move your wagon to the right !");
+        yield return new WaitForSeconds(2);
         while (controller.WagonAlign != Align.Right)
         {
             yield return null;
         }
         yield return new WaitForSeconds(1);
 
+        //TUNNEL PART
+        spawner.SpawnTunnel();
         audioSource.clip = tunnel_1;
+        audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+        audioSource.clip = tunnel_2;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
@@ -90,6 +119,8 @@ public class Tutorial : MonoBehaviour
         ui.SetMessage("Now the game starts !");
         yield return new WaitForSeconds(2);
         ui.SetMessage("");
+
+
         
         spawner.enabled = true;
         game.StartGame();

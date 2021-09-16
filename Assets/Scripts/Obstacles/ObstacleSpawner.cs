@@ -44,6 +44,21 @@ namespace Obstacles
             Instantiate(possibleObstacles[obstacleIndex], obstacleContainer);
         }
 
+        public void SpawnBats()
+        {
+            Instantiate(possibleObstacles[0], obstacleContainer);
+        }
+
+        public void SpawnGhost()
+        {
+            Instantiate(possibleObstacles[1], obstacleContainer);
+        }
+
+        public void SpawnTunnel()
+        {
+            Instantiate(possibleObstacles[2], obstacleContainer);
+        }
+
         public void Clear()
         {
             foreach (Transform obstacle in obstacleContainer) {
