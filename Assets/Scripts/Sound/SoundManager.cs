@@ -58,27 +58,27 @@ namespace Sound
             else
                 MUS_Timer_02.volume = 1;
 
-            if (state.gameTimer < 240 && state.gameTimer > 239 && !VO_Timer_4_min.isPlaying)
+            if (state.gameTimer < 241 && state.gameTimer > 240 && !VO_Timer_4_min.isPlaying)
             {
                 VO_Timer_4_min.Play();
             }
-            if (state.gameTimer < 180 && state.gameTimer > 179 && !VO_Timer_3_min.isPlaying)
+            if (state.gameTimer < 181 && state.gameTimer > 180 && !VO_Timer_3_min.isPlaying)
             {
                 VO_Timer_3_min.Play();
             }
-            if (state.gameTimer < 120 && state.gameTimer > 119 && !VO_Timer_2_min.isPlaying)
+            if (state.gameTimer < 121 && state.gameTimer > 120 && !VO_Timer_2_min.isPlaying)
             {
                 VO_Timer_2_min.Play();
             }
-            if (state.gameTimer < 60 && state.gameTimer > 59 && !VO_Timer_1_min.isPlaying)
+            if (state.gameTimer < 61 && state.gameTimer > 60 && !VO_Timer_1_min.isPlaying)
             {
                 VO_Timer_1_min.Play();
             }
-            if (state.gameTimer < 30 && state.gameTimer > 29 && !VO_Timer_30_s.isPlaying)
+            if (state.gameTimer < 31 && state.gameTimer > 30 && !VO_Timer_30_s.isPlaying)
             {
                 VO_Timer_30_s.Play();
             }
-            if (state.gameTimer < 10 && state.gameTimer > 9 && !VO_Timer_10_s.isPlaying)
+            if (state.gameTimer < 11 && state.gameTimer > 10 && !VO_Timer_10_s.isPlaying)
             {
                 VO_Timer_10_s.Play();
             }
