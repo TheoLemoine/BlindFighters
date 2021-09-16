@@ -632,8 +632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 7ad2ca88d2bb4104396ae46e6174fdbe, type: 2}
   _playerControllers:
-  - {fileID: 444780753}
-  - {fileID: 1483875087}
+  - {fileID: 444780752}
+  - {fileID: 1483875086}
   - {fileID: 1921708450}
   _leftWheelTransform: {fileID: 1332694330}
   _rightWheelTransform: {fileID: 2491086}
@@ -1549,7 +1549,7 @@ GameObject:
   - component: {fileID: 768650267}
   - component: {fileID: 768650266}
   m_Layer: 0
-  m_Name: Sound Manager (1)
+  m_Name: Sound Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
