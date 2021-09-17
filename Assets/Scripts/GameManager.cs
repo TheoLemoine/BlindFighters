@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float accPerSec = 0.3f;
     [SerializeField] private float slowDownPerCollide = 10;
     [SerializeField] private float minGameSpeed = 5;
+    private float startDistance;
 
     private void Awake() {
         if (instance != null && instance != this)
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
         // update game stats
         state.gameSpeed += accPerSec * Time.deltaTime;
         state.gameTimer -= Time.deltaTime;
+        state.gameDistance += (state.gameSpeed * Time.deltaTime)/10;
+        Debug.Log(state.gameDistance);
 
         if (state.gameTimer <= 0)
         {
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         state.gameTimer = startTimer;
         state.gameSpeed = minGameSpeed;
+        state.gameDistance = startDistance;
     }
     
 }

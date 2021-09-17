@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 2737005077569106228, guid: 96d416e9f02605747814820dcbed1bb9, type: 3}
       propertyPath: obstacleSound
       value: 
-      objectReference: {fileID: 11400000, guid: 02a78c27296e04d4f88ef9541ace6ee2, type: 2}
+      objectReference: {fileID: 11400000, guid: a40cef97e0baf7e4e8052850a24cb8d0, type: 2}
     - target: {fileID: 2737005077569106228, guid: 96d416e9f02605747814820dcbed1bb9, type: 3}
       propertyPath: isLeftObstacle
       value: 1

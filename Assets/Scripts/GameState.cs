@@ -7,6 +7,7 @@ public class GameState : ScriptableObject
 {
     public float gameSpeed;
     public float gameTimer;
+    public float gameDistance;
     [Range(1,3)]
     public int NumberOfPlayersRequired = 1;
 

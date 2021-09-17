@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameState state;
     [SerializeField] private TextMeshProUGUI textTimer;
     [SerializeField] private TextMeshProUGUI textSpeed;
+    [SerializeField] private TextMeshProUGUI textDistance;
     [SerializeField] private TextMeshProUGUI textMessageContainer;
 
     // Update is called once per frame
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     {
         textSpeed.text = state.gameSpeed.ToString("N2");
         textTimer.text = TimeSpan.FromSeconds(state.gameTimer).ToString("mm':'ss");
+        textDistance.text = state.gameDistance.ToString("N2") + " m";
     }
 
     public void SetMessage(string message)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51e95342a83b4cc49c99bc7032c76470, type: 3}
-  m_Name: RSC_Ghost_Signal
+  m_Name: RSC_Ghost_Ongoing
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 7ad2ca88d2bb4104396ae46e6174fdbe, type: 2}
   sounds:

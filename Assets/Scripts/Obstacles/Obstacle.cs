@@ -47,13 +47,7 @@ namespace Obstacles
         public void IsInObstacle(Collider other)
         {
             var wagon = other.GetComponentInParent<WagonController>();
-            /*
-            if(isLeftObstacle && isRightObstacle)
-            {
-                if (!isPlay)
-                    _soundManager.PlaySound(soundAlignment, obstacleSound.PreOngoingSound.GetClip());
-            }
-            */
+            
             if (isLeftObstacle && wagon.WagonAlign == Align.Left ||
                 isCenterObstacle && wagon.WagonAlign == Align.Center ||
                 isRightObstacle && wagon.WagonAlign == Align.Right)
@@ -78,11 +72,23 @@ namespace Obstacles
 
         public void OnEnterObstacleZone(Collider other)
         {
+            if (isLeftObstacle && isRightObstacle)
+            {
+                if (!isPlay)
+                    _soundManager.PlaySound(alignment, obstacleSound.PreOngoingSound.GetClip(), obstacleMixerGroup);
+            }
+
             state.TriggerOnEnterObstacleZone(gameObject.GetInstanceID());
         }
 
         public void OnExitObstacleZone(Collider other)
         {
+            if (isLeftObstacle && isRightObstacle)
+            {
+                if (!isPlay)
+                    _soundManager.PlaySound(alignment, obstacleSound.PostOngoingSound.GetClip(), obstacleMixerGroup);
+            }
+
             state.TriggerOnExitObstacleZone(gameObject.GetInstanceID());
         }
 

@@ -20,11 +20,26 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private AudioClip tunnel_1;
     [SerializeField] private AudioClip tunnel_2;
 
+    private bool firstBat;
+    private bool firstGhost;
+    private bool firstTunnel;
+
     private void Start()
     {
         StartTutorial();
 
         state.OnGameEnded += StartTutorial;
+        state.OnExitObstacleZone += OnExitObstacleZone;
+    }
+
+    public void OnExitObstacleZone(int id)
+    {
+        if (!firstBat)
+            firstBat = true;
+        else if (!firstGhost)
+            firstGhost = true;
+        else if (!firstTunnel)
+            firstTunnel = true;
     }
 
     public void StartTutorial()
@@ -34,11 +49,14 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TutorialTimeline()
     {
+        firstBat = false;
+        firstGhost = false;
+        firstTunnel = false;
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         spawner.Clear();
         spawner.enabled = false;
@@ -51,17 +69,18 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0);
 
         //BATS PART
         spawner.SpawnBats();
+        yield return new WaitForSeconds(2);
         audioSource.clip = bats_1;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2);
         audioSource.clip = bats_2;
         audioSource.Play();
         while (audioSource.isPlaying)
@@ -70,22 +89,29 @@ public class Tutorial : MonoBehaviour
         }
         ui.SetMessage("Move your wagon to the left !");
         yield return new WaitForSeconds(2);
+        while (!firstBat  || controller.WagonAlign != Align.Left)
+        {
+            yield return null;
+        }
+        /*
         while (controller.WagonAlign != Align.Left)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        */
+        yield return new WaitForSeconds(0);
 
         //GHOST PART
         ui.SetMessage("");
         spawner.SpawnGhost();
+        yield return new WaitForSeconds(2);
         audioSource.clip = ghosts_1;
         audioSource.Play();
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2);
         audioSource.clip = ghosts_2;
         audioSource.Play();
         while (audioSource.isPlaying)
@@ -94,15 +120,22 @@ public class Tutorial : MonoBehaviour
         }
         ui.SetMessage("Good, now move your wagon to the right !");
         yield return new WaitForSeconds(2);
+        while (!firstGhost || controller.WagonAlign != Align.Right)
+        {
+            yield return null;
+        }
+        /*
         while (controller.WagonAlign != Align.Right)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        */
+        yield return new WaitForSeconds(0);
 
         //TUNNEL PART
         ui.SetMessage("");
         spawner.SpawnTunnel();
+        yield return new WaitForSeconds(2);
         audioSource.clip = tunnel_1;
         audioSource.Play();
         while (audioSource.isPlaying)
